@@ -11,3 +11,4 @@ CMakeFiles/
 .idea/
 .DS_Store
 .env
+build*/
