@@ -1,18 +1,16 @@
 # AGENTS.md — llm-pool
 
 ## Purpose
-Single-header C++ thread pool + priority queue + token-bucket rate limiter for LLM API calls.
-
-## Architecture
-Everything in `include/llm_pool.hpp`. Guard: `#ifdef LLM_POOL_IMPLEMENTATION`. No external deps.
+Single-header C++ library. Everything lives in `include/llm_pool.hpp`.
 
 ## Build
 ```bash
 cmake -B build && cmake --build build
 ```
 
-## Constraints
-- Single header, no external deps, C++17, namespace `llm`
-- Thread-safe via mutex + condvar
-- Token bucket rate limiting
-- Priority queue via `std::priority_queue<Entry>` (max-heap on Priority enum)
+## Rules
+- Single header. Never split `include/llm_pool.hpp`.
+- No external deps (libcurl allowed only where needed for HTTP).
+- All public API in namespace `llm`.
+- C++17, zero warnings with -Wall -Wextra.
+- Implementation guard: `#ifdef LLM_POOL_IMPLEMENTATION`
