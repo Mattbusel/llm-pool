@@ -90,7 +90,6 @@ private:
 
     void worker_loop();
     bool rate_limit_ok_locked(size_t tokens);
-    void record_request_locked();
 
     PoolConfig m_cfg;
 
@@ -152,8 +151,6 @@ bool Pool::rate_limit_ok_locked(size_t tokens) {
     if (m_bucket_tokens + tokens > m_cfg.tokens_per_minute) return false;
     return true;
 }
-
-void Pool::record_request_locked(/* tokens param removed — handled in submit */) {}
 
 void Pool::submit(PoolRequest request, std::function<void(PoolResult)> on_complete) {
     std::unique_lock<std::mutex> lock(m_mu);
